@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"   
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<html xmlns="http://www.w3.org/1999/xhtml">  
+<head>  
+	<title>Essence Demo</title>  
+	<link rel="stylesheet" type="text/css" href="./css/style.css"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="pragma" content="no-cache" />  
+	<script type="text/javascript" src="js/prototype.js"></script>  
+	<script type="text/javascript">  
+	// <![CDATA[  
+	document.observe('dom:loaded', function() {  
+		  
+		function sendForm(event){  
+			// we stop the default submit behaviour  
+			Event.stop(event);  
+			var oOptions = {  
+				method: "POST",  
+				parameters: Form.serialize("essenceDemo"),  
+				asynchronous: true,  
+				onFailure: function (oXHR) {  
+					$('feedback').update(oXHR.statusText);  
+				},  
+				onLoading: function (oXHR) {  
+					$('feedback').update('Sending data ... <img src="images/loading_indicator.gif" title="Loading..." alt="Loading..." border="0" />');  
+				},                            
+				onSuccess: function(oXHR) {  
+				   $('feedback').update(oXHR.responseText);  
+				}                 
+			};  
+			var oRequest = new Ajax.Updater({success: oOptions.onSuccess.bindAsEventListener(oOptions)}, "Demo.php", oOptions);             
+		}  
+		Event.observe('submitButton', 'click', sendForm, false);  
+		  
+	});   
+	// ]]>  
+	</script>
+</head>  
+<body>  
+	<div id="Essence">  
+		<form id="essenceDemo">  
+			<p><input class="urlinput" type="text" name="url" placeholder="Enter your URL"/></p>
+			<input type="submit" id="submitButton" value="submit" />
+		</form>  
+	</div>  
+	<hr></hr>
+	<div id="feedback"></div>  
+</body>  
+</html>  
