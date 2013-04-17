@@ -12,4 +12,4 @@ Essence_Demo was created by Sean Steindl (aka Laughingwithu).
 
 #Acknowledgements
 
-[Essence](https://github.com/felixgirault/essence) was created by [Félix Girault](https://github.com/felixgirault) and is licenced unde The FreeBSD License. 
+[Essence](https://github.com/felixgirault/essence) was created by [Félix Girault](https://github.com/felixgirault) and is licenced under The FreeBSD License. 
