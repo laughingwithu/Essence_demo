@@ -8,7 +8,7 @@ assessing patches and features.
 If you think this guide can be improved, please share your thoughts.
 
 
-## Do not…
+## Do notï¿½
 
 Please **do not** use the issue tracker for personal support requests (use StackOverflow or IRC).
 
@@ -131,5 +131,4 @@ project:
     clear title and description.
 
 ## Acknowledgment
-	Based on a work at
-[github.com/necolas/idiomatic-css](https://github.com/necolas/idiomatic-css).
+Based on a work by [necolas/](https://github.com/necolas/).
