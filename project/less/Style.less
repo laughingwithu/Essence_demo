@@ -1,0 +1,77 @@
+@import 'stylesheets/config.less';
+
+@total-width: 100%;
+
+////////////
+// LAYOUT //
+////////////
+body {
+	.widths(300px, 100%);
+}
+
+html, body {
+	height: 100%;
+	margin: 0;
+}
+
+.page {
+	.grid();
+	height: 100%; 
+	overflow: auto; 
+}
+
+.scroll-container {
+	margin-top: @rhythmic-unit*5; 
+}
+
+header {
+	top: 0; 
+	height: @rhythmic-unit*5;
+	box-shadow: 0 0 5px 5px #888;
+	opacity:0.95;
+	background-color: white;
+	width: 100%;
+	z-index: 1030;
+	position: fixed;
+}
+
+footer {
+	height: @rhythmic-unit*4;
+}
+
+section {
+	.column(12);
+}
+
+.first-row {
+	.row(12);
+}
+
+.first {
+	.column(6);
+}
+.second {
+	.column(6);
+}
+.error {
+	.column(12);
+}
+
+// First Media Query for Screens smaller than 960px
+@media screen and (max-width: 960px) {
+	.first {
+		.column(6);
+	}
+	.second {
+		.column(6);
+	}
+}
+// Second Media Query for Screens smaller than 480px
+@media screen and (max-width: 480px) {
+	.first {
+		.column(12);
+	}
+	.second {
+		.column(12);
+	}
+}

@@ -2,6 +2,7 @@
 
 /**
  *	@author Félix Girault <felix.girault@gmail.com>
+ *	@author Laughingwithu <laughingwithu@gmail.com>
  *	@license FreeBSD License (http://opensource.org/licenses/BSD-2-Clause)
  */
 
@@ -49,6 +50,7 @@ abstract class OpenGraph extends \fg\Essence\Provider {
 
 		$og = $this->_extractInformations( $url );
 
+		
 		if ( empty( $og )) {
 			throw new \fg\Essence\Exception(
 				'Unable to extract OpenGraph data.'
@@ -59,9 +61,6 @@ abstract class OpenGraph extends \fg\Essence\Provider {
 			$og,
 			array(
 				'og:type' => 'type',
-				'og:title' => 'title',
-				'og:description' => 'description',
-				'og:site_name' => 'providerName',
 				'og:title' => 'title',
 				'og:description' => 'description',
 				'og:site_name' => 'providerName',
@@ -111,7 +110,40 @@ abstract class OpenGraph extends \fg\Essence\Provider {
 			$og[ $meta['property']] = $meta['content'];
 		}
 
+		if ( empty( $og['html'])) {
+			$og['html'] = $this->_buildHtml( $og );
+		}
+
 		$this->_Cache->set( $url, $og );
+
 		return $og;
 	}
+
+
+
+	/**
+	 *	Ensures that an there is always a html array available.
+	 *
+	 *	@param string $og to include array parsed by Essence.
+	 *	@return array with html variable included.
+	 */
+	
+	protected function _buildHtml( $og ) {
+
+		$title = $og['og:title'];
+		$html = '';
+
+		// check if the preferred resource exists (ie. video < image < link) and
+		// then builds an html string accordingly
+		if ( isset( $og['og:video'])) {
+			$html = '<iframe src="' . $og['og:video'] . '" alt="' . $title . '" width="560" height="315" frameborder="0" allowfullscreen mozallowfullscreen webkitallowfullscreen><p>Your browser does not support iframes.</p></iframe>'; // The dimensions 560 x 315 are generally standard and not all OG providers give dimensions
+		} else if ( isset( $og['og:image'])) {
+			$html = '<img src="' . $og['og:image'] . '" alt="' . $title . '">';
+		} else {
+			$html = '<a href="' . $og['og:url'] . '" target="_blank">' . $title . '</a>';
+		}
+
+		return $html;
+	}
 }
+

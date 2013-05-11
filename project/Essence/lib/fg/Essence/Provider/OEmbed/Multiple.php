@@ -2,6 +2,7 @@
 
 /**
  *	@author Félix Girault <felix.girault@gmail.com>
+ *	@author Laughingwithu <Laughingwithu@gmail.com>
  *	@license FreeBSD License (http://opensource.org/licenses/BSD-2-Clause)
  */
 
@@ -37,6 +38,11 @@ class Multiple extends \fg\Essence\Provider\OEmbed {
 				'endpoint' => 'http://www.23hq.com/23/oembed?format=json&url=%s',
 				'format' => self::json
 			),
+			'Blip.tv' => array(
+				'pattern' => '#blip.tv/.+#i',
+				'endpoint' => 'http://blip.tv/oembed?format=json&url=%s',
+				'format' => self::json
+			),			
 			'Cacoo' => array(
 				'pattern' => '#cacoo.com/.+#i',
 				'endpoint' => 'http://cacoo.com/oembed.json?url=%s',
@@ -52,7 +58,7 @@ class Multiple extends \fg\Essence\Provider\OEmbed {
 				'endpoint' => 'http://clikthrough.com/services/oembed?format=json&url=%s',
 				'format' => self::json
 			),
-			'Collegehumor' => array(
+			'CollegeHumor' => array(
 				'pattern' => '#collegehumor.com/(video|embed)/.*#i',
 				'endpoint' => 'http://www.collegehumor.com/oembed.json?url=%s',
 				'format' => self::json
@@ -72,7 +78,7 @@ class Multiple extends \fg\Essence\Provider\OEmbed {
 				'endpoint' => 'http://flickr.com/services/oembed?format=json&url=%s',
 				'format' => self::json
 			),
-			'Funnyordie' => array(
+			'FunnyOrDie' => array(
 				'pattern' => '#funnyordie\.com/videos/.*#i',
 				'endpoint' => 'http://www.funnyordie.com/oembed?format=json&url=%s',
 				'format' => self::json
@@ -142,7 +148,7 @@ class Multiple extends \fg\Essence\Provider\OEmbed {
 				'endpoint' => 'http://sketchfab.com/oembed?format=json&url=%s',
 				'format' => self::json
 			),
-			'Slideshare' => array(
+			'SlideShare' => array(
 				'pattern' => '#slideshare\.net/.+/.+#i',
 				'endpoint' => 'http://www.slideshare.net/api/oembed/2?format=json&url=%s',
 				'format' => self::json
@@ -165,6 +171,11 @@ class Multiple extends \fg\Essence\Provider\OEmbed {
 			'Vhx' => array(
 				'pattern' => '#vhx.tv/.+#i',
 				'endpoint' => 'http://vhx.tv/services/oembed.json?url=%s',
+				'format' => self::json
+			),
+			'Viddler' => array(
+				'pattern' => '#viddler.com/.+#i',
+				'endpoint' => 'http://www.viddler.com/oembed/?url=%s',
 				'format' => self::json
 			),
 			'Yfrog' => array(

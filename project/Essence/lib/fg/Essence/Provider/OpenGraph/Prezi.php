@@ -1,7 +1,7 @@
 <?php
 
 /**
- *	@author Laughingwithu <Laughingwithu@gmail.com>
+ *	@author Laughingwithu <laughingwithu@gmail.com>
  *	@license FreeBSD License (http://opensource.org/licenses/BSD-2-Clause)
  */
 
@@ -10,18 +10,17 @@ namespace fg\Essence\Provider\OpenGraph;
 
 
 /**
- *	Bandcamp provider (http://www.bandcamp.com).
+ *	Prezi provider (http://www.prezi.com).
  *
  *	@package fg.Essence.Provider.OpenGraph
  */
 
-class Bandcamp extends \fg\Essence\Provider\OpenGraph {
+class Prezi extends \fg\Essence\Provider\OpenGraph {
 
 	/**
 	 *	{@inheritDoc}
 	 */
 
-	protected $_pattern = '#bandcamp\.com/(album|track)/#i';
+	protected $_pattern = '#prezi\.com/.+/.+#i';
 
 }
-
