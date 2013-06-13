@@ -294,58 +294,36 @@ class Essence {
 
 	public function replace( $text, $template = '' ) {
 
-		$count = preg_match_all(
+		$Essence = $this;
+
+		return preg_replace_callback(
 			// http://daringfireball.net/2009/11/liberal_regex_for_matching_urls
-			'#\b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/)))#i',
-			$text,
-			$matches,
-			PREG_PATTERN_ORDER
-		);
+			'#(\s)(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/)))#i',
+			function ( $matches ) use ( &$Essence, $template ) {
+				$Media = $Essence->embed( $matches[ 2 ]);
+				$replacement = '';
 
-		if ( $count ) {
-			$medias = $this->embedAll( $matches[ 0 ]);
-			$replacements = array( );
-
-			foreach ( $medias as $url => $Media ) {
 				if ( $Media !== null ) {
-					$replacements[ $url ] = empty( $template )
-						? $Media->property( 'html' )
-						: $this->_renderTemplate( $template, $Media );
+					if ( empty( $template )) {
+						$replacement = $Media->property( 'html' );
+					} else {
+						$replacements = array( );
+
+						foreach ( $Media as $property => $value ) {
+							$replacements["%$property%"] = $value;
+						}
+
+						$replacement = str_replace(
+							array_keys( $replacements ),
+							array_values( $replacements ),
+							$template
+						);
+					}
 				}
-			}
 
-			$text = str_replace(
-				array_keys( $replacements ),
-				array_values( $replacements ),
-				$text
-			);
-		}
-
-		return $text;
-	}
-
-
-
-	/**
-	 *	Renders the given template with the media properties.
-	 *
-	 *	@param string $template Template to render.
-	 *	@param Media $Media Media object from which to gather properties.
-	 *	@return string Rendered template.
-	 */
-
-	protected function _renderTemplate( $template, Media $Media ) {
-
-		$replacements = array( );
-
-		foreach ( $Media as $property => $value ) {
-			$replacements["%$property%"] = $value;
-		}
-
-		return str_replace(
-			array_keys( $replacements ),
-			array_values( $replacements ),
-			$template
+				return $matches[1] . $replacement;
+			},
+			$text
 		);
 	}
 
